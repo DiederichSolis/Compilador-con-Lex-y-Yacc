@@ -22,11 +22,15 @@
 "("                     { return '('; }
 ")"                     { return ')'; }
 
+
+
 [ \t\r]+                ;  // ignora espacios
-.|\n                    ;  // ignora todo lo demás
+\n        ;  // ignora saltos de línea
+.         { fprintf(stderr, "❌ Token inválido (ASCII %d): [%s]\n", yytext[0], yytext); }
 
 %%
 
-int yywrap() {
+extern "C" int yywrap() {
     return 1;
 }
+
