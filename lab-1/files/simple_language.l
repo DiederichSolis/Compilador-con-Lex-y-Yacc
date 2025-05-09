@@ -19,6 +19,9 @@
 "/"                     { return '/'; }
 "="                     { return '='; }
 ":"                     { return ':'; }
+"("                     { return '('; }
+")"                     { return ')'; }
+
 [ \t\r]+                ;  // ignora espacios
 .|\n                    ;  // ignora todo lo demás
 
