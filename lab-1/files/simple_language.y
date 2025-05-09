@@ -48,14 +48,37 @@ assignment:
     ;
 
 expression:
-    NUMBER                  { $$ = $1; }
-    | ID                    { $$ = vars[*$1]; delete $1; }
-    | expression '+' expression { $$ = $1 + $3; }
-    | expression '-' expression { $$ = $1 - $3; }
-    | expression '*' expression { $$ = $1 * $3; }
-    | expression '/' expression { $$ = $1 / $3; }
-    | '(' expression ')' { $$ = $2; }
+      expression '+' expression {
+          printf("🟢 Suma: %d + %d\n", $1, $3);
+          $$ = $1 + $3;
+      }
+    | expression '-' expression {
+          printf("🟢 Resta: %d - %d\n", $1, $3);
+          $$ = $1 - $3;
+      }
+    | expression '*' expression {
+          printf("🟢 Multiplicación: %d * %d\n", $1, $3);
+          $$ = $1 * $3;
+      }
+    | expression '/' expression {
+          printf("🟢 División: %d / %d\n", $1, $3);
+          $$ = $1 / $3;
+      }
+    | '(' expression ')' {
+          printf("🔄 Agrupación con paréntesis: (%d)\n", $2);
+          $$ = $2;
+      }
+    | NUMBER {
+          printf("🔢 Número: %d\n", $1);
+          $$ = $1;
+      }
+    | ID {
+          printf("📦 Variable %s = %d\n", $1->c_str(), vars[*$1]);
+          $$ = vars[*$1];
+          delete $1;
+      }
     ;
+
 
 %%
 

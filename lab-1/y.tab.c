@@ -397,7 +397,7 @@ static const yytype_uint8 yytranslate[] =
 static const yytype_uint8 yyprhs[] =
 {
        0,     0,     3,     5,     7,    10,    12,    15,    18,    21,
-      26,    28,    30,    34,    38,    42,    46
+      26,    30,    34,    38,    42,    46,    48
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
@@ -405,16 +405,16 @@ static const yytype_int8 yyrhs[] =
 {
       15,     0,    -1,    16,    -1,    17,    -1,    16,    17,    -1,
       18,    -1,    18,    11,    -1,    19,    11,    -1,     4,    11,
-      -1,     5,     4,     6,    19,    -1,     3,    -1,     4,    -1,
-      19,     7,    19,    -1,    19,     8,    19,    -1,    19,     9,
-      19,    -1,    19,    10,    19,    -1,    12,    19,    13,    -1
+      -1,     5,     4,     6,    19,    -1,    19,     7,    19,    -1,
+      19,     8,    19,    -1,    19,     9,    19,    -1,    19,    10,
+      19,    -1,    12,    19,    13,    -1,     3,    -1,     4,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
        0,    25,    25,    29,    30,    34,    35,    36,    37,    42,
-      51,    52,    53,    54,    55,    56,    57
+      51,    55,    59,    63,    67,    71,    75
 };
 #endif
 
@@ -450,7 +450,7 @@ static const yytype_uint8 yyr1[] =
 static const yytype_uint8 yyr2[] =
 {
        0,     2,     1,     1,     2,     1,     2,     2,     2,     4,
-       1,     1,     3,     3,     3,     3,     3
+       3,     3,     3,     3,     3,     1,     1
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -458,9 +458,9 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,    10,    11,     0,     0,     0,     2,     3,     5,     0,
-       8,     0,    11,     0,     1,     4,     6,     0,     0,     0,
-       0,     7,     0,    16,    12,    13,    14,    15,     9
+       0,    15,    16,     0,     0,     0,     2,     3,     5,     0,
+       8,     0,    16,     0,     1,     4,     6,     0,     0,     0,
+       0,     7,     0,    14,    10,    11,    12,    13,     9
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -1352,42 +1352,64 @@ yyreduce:
 
   case 10:
 #line 51 "./files/simple_language.y"
-    { (yyval.num) = (yyvsp[(1) - (1)].num); }
+    {
+          printf("🟢 Suma: %d + %d\n", (yyvsp[(1) - (3)].num), (yyvsp[(3) - (3)].num));
+          (yyval.num) = (yyvsp[(1) - (3)].num) + (yyvsp[(3) - (3)].num);
+      }
     break;
 
   case 11:
-#line 52 "./files/simple_language.y"
-    { (yyval.num) = vars[*(yyvsp[(1) - (1)].str)]; delete (yyvsp[(1) - (1)].str); }
+#line 55 "./files/simple_language.y"
+    {
+          printf("🟢 Resta: %d - %d\n", (yyvsp[(1) - (3)].num), (yyvsp[(3) - (3)].num));
+          (yyval.num) = (yyvsp[(1) - (3)].num) - (yyvsp[(3) - (3)].num);
+      }
     break;
 
   case 12:
-#line 53 "./files/simple_language.y"
-    { (yyval.num) = (yyvsp[(1) - (3)].num) + (yyvsp[(3) - (3)].num); }
+#line 59 "./files/simple_language.y"
+    {
+          printf("🟢 Multiplicación: %d * %d\n", (yyvsp[(1) - (3)].num), (yyvsp[(3) - (3)].num));
+          (yyval.num) = (yyvsp[(1) - (3)].num) * (yyvsp[(3) - (3)].num);
+      }
     break;
 
   case 13:
-#line 54 "./files/simple_language.y"
-    { (yyval.num) = (yyvsp[(1) - (3)].num) - (yyvsp[(3) - (3)].num); }
+#line 63 "./files/simple_language.y"
+    {
+          printf("🟢 División: %d / %d\n", (yyvsp[(1) - (3)].num), (yyvsp[(3) - (3)].num));
+          (yyval.num) = (yyvsp[(1) - (3)].num) / (yyvsp[(3) - (3)].num);
+      }
     break;
 
   case 14:
-#line 55 "./files/simple_language.y"
-    { (yyval.num) = (yyvsp[(1) - (3)].num) * (yyvsp[(3) - (3)].num); }
+#line 67 "./files/simple_language.y"
+    {
+          printf("🔄 Agrupación con paréntesis: (%d)\n", (yyvsp[(2) - (3)].num));
+          (yyval.num) = (yyvsp[(2) - (3)].num);
+      }
     break;
 
   case 15:
-#line 56 "./files/simple_language.y"
-    { (yyval.num) = (yyvsp[(1) - (3)].num) / (yyvsp[(3) - (3)].num); }
+#line 71 "./files/simple_language.y"
+    {
+          printf("🔢 Número: %d\n", (yyvsp[(1) - (1)].num));
+          (yyval.num) = (yyvsp[(1) - (1)].num);
+      }
     break;
 
   case 16:
-#line 57 "./files/simple_language.y"
-    { (yyval.num) = (yyvsp[(2) - (3)].num); }
+#line 75 "./files/simple_language.y"
+    {
+          printf("📦 Variable %s = %d\n", (yyvsp[(1) - (1)].str)->c_str(), vars[*(yyvsp[(1) - (1)].str)]);
+          (yyval.num) = vars[*(yyvsp[(1) - (1)].str)];
+          delete (yyvsp[(1) - (1)].str);
+      }
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1391 "y.tab.c"
+#line 1413 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1601,7 +1623,7 @@ yyreturn:
 }
 
 
-#line 60 "./files/simple_language.y"
+#line 83 "./files/simple_language.y"
 
 
 int main() {
